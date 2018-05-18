@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zhku.shms.dao.StudentExprCompletionMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.zhku.shms.bean.StudentExprCompletion">
+    <id column="expr_id" jdbcType="INTEGER" property="exprId" />
+    <id column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="commit_time" jdbcType="TIMESTAMP" property="commitTime" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="check_state" jdbcType="TINYINT" property="checkState" />
+    <result column="expr_src" jdbcType="VARCHAR" property="exprSrc" />
+    <result column="score" jdbcType="REAL" property="score" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.zhku.shms.bean.StudentExprCompletion">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    expr_id, student_id, commit_time, state, check_state, expr_src, score
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="cn.edu.zhku.shms.bean.StudentExprCompletionKey" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from student_expr_completion
+    where expr_id = #{exprId,jdbcType=INTEGER}
+      and student_id = #{studentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.edu.zhku.shms.bean.StudentExprCompletionKey">
+    delete from student_expr_completion
+    where expr_id = #{exprId,jdbcType=INTEGER}
+      and student_id = #{studentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.zhku.shms.bean.StudentExprCompletion">
+    insert into student_expr_completion (expr_id, student_id, commit_time, 
+      state, check_state, expr_src, 
+      score, content)
+    values (#{exprId,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{commitTime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=TINYINT}, #{checkState,jdbcType=TINYINT}, #{exprSrc,jdbcType=VARCHAR}, 
+      #{score,jdbcType=REAL}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.zhku.shms.bean.StudentExprCompletion">
+    insert into student_expr_completion
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="exprId != null">
+        expr_id,
+      </if>
+      <if test="studentId != null">
+        student_id,
+      </if>
+      <if test="commitTime != null">
+        commit_time,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="checkState != null">
+        check_state,
+      </if>
+      <if test="exprSrc != null">
+        expr_src,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="exprId != null">
+        #{exprId,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null">
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="commitTime != null">
+        #{commitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="checkState != null">
+        #{checkState,jdbcType=TINYINT},
+      </if>
+      <if test="exprSrc != null">
+        #{exprSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=REAL},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.zhku.shms.bean.StudentExprCompletion">
+    update student_expr_completion
+    <set>
+      <if test="commitTime != null">
+        commit_time = #{commitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="checkState != null">
+        check_state = #{checkState,jdbcType=TINYINT},
+      </if>
+      <if test="exprSrc != null">
+        expr_src = #{exprSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=REAL},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where expr_id = #{exprId,jdbcType=INTEGER}
+      and student_id = #{studentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.zhku.shms.bean.StudentExprCompletion">
+    update student_expr_completion
+    set commit_time = #{commitTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=TINYINT},
+      check_state = #{checkState,jdbcType=TINYINT},
+      expr_src = #{exprSrc,jdbcType=VARCHAR},
+      score = #{score,jdbcType=REAL},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where expr_id = #{exprId,jdbcType=INTEGER}
+      and student_id = #{studentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.zhku.shms.bean.StudentExprCompletion">
+    update student_expr_completion
+    set commit_time = #{commitTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=TINYINT},
+      check_state = #{checkState,jdbcType=TINYINT},
+      expr_src = #{exprSrc,jdbcType=VARCHAR},
+      score = #{score,jdbcType=REAL}
+    where expr_id = #{exprId,jdbcType=INTEGER}
+      and student_id = #{studentId,jdbcType=INTEGER}
+  </update>
+</mapper>

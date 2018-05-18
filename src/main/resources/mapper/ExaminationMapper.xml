@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zhku.shms.dao.ExaminationMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.zhku.shms.bean.Examination">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="total_score" jdbcType="REAL" property="totalScore" />
+    <result column="single_chioce_amount" jdbcType="TINYINT" property="singleChioceAmount" />
+    <result column="multipe_chioce_amount" jdbcType="TINYINT" property="multipeChioceAmount" />
+    <result column="blank_filling_amount" jdbcType="TINYINT" property="blankFillingAmount" />
+    <result column="true_or_false_amount" jdbcType="TINYINT" property="trueOrFalseAmount" />
+    <result column="true_or_false_score" jdbcType="REAL" property="trueOrFalseScore" />
+    <result column="single_choice_score" jdbcType="REAL" property="singleChoiceScore" />
+    <result column="multiple_choice_score" jdbcType="REAL" property="multipleChoiceScore" />
+    <result column="blank_filling_score" jdbcType="REAL" property="blankFillingScore" />
+    <result column="exam_time" jdbcType="INTEGER" property="examTime" />
+    <result column="start time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="opened_course_id" jdbcType="INTEGER" property="openedCourseId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.zhku.shms.bean.Examination">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, total_score, single_chioce_amount, multipe_chioce_amount, blank_filling_amount, 
+    true_or_false_amount, true_or_false_score, single_choice_score, multiple_choice_score, 
+    blank_filling_score, exam_time, "start time", "end time", create_time, creator, opened_course_id
+  </sql>
+  <sql id="Blob_Column_List">
+    description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from examination
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from examination
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.zhku.shms.bean.Examination">
+    insert into examination (id, name, total_score, 
+      single_chioce_amount, multipe_chioce_amount, 
+      blank_filling_amount, true_or_false_amount, 
+      true_or_false_score, single_choice_score, multiple_choice_score, 
+      blank_filling_score, exam_time, "start time", 
+      "end time", create_time, creator, 
+      opened_course_id, description)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{totalScore,jdbcType=REAL}, 
+      #{singleChioceAmount,jdbcType=TINYINT}, #{multipeChioceAmount,jdbcType=TINYINT}, 
+      #{blankFillingAmount,jdbcType=TINYINT}, #{trueOrFalseAmount,jdbcType=TINYINT}, 
+      #{trueOrFalseScore,jdbcType=REAL}, #{singleChoiceScore,jdbcType=REAL}, #{multipleChoiceScore,jdbcType=REAL}, 
+      #{blankFillingScore,jdbcType=REAL}, #{examTime,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, 
+      #{openedCourseId,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.zhku.shms.bean.Examination">
+    insert into examination
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="totalScore != null">
+        total_score,
+      </if>
+      <if test="singleChioceAmount != null">
+        single_chioce_amount,
+      </if>
+      <if test="multipeChioceAmount != null">
+        multipe_chioce_amount,
+      </if>
+      <if test="blankFillingAmount != null">
+        blank_filling_amount,
+      </if>
+      <if test="trueOrFalseAmount != null">
+        true_or_false_amount,
+      </if>
+      <if test="trueOrFalseScore != null">
+        true_or_false_score,
+      </if>
+      <if test="singleChoiceScore != null">
+        single_choice_score,
+      </if>
+      <if test="multipleChoiceScore != null">
+        multiple_choice_score,
+      </if>
+      <if test="blankFillingScore != null">
+        blank_filling_score,
+      </if>
+      <if test="examTime != null">
+        exam_time,
+      </if>
+      <if test="startTime != null">
+        "start time",
+      </if>
+      <if test="endTime != null">
+        "end time",
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="openedCourseId != null">
+        opened_course_id,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="totalScore != null">
+        #{totalScore,jdbcType=REAL},
+      </if>
+      <if test="singleChioceAmount != null">
+        #{singleChioceAmount,jdbcType=TINYINT},
+      </if>
+      <if test="multipeChioceAmount != null">
+        #{multipeChioceAmount,jdbcType=TINYINT},
+      </if>
+      <if test="blankFillingAmount != null">
+        #{blankFillingAmount,jdbcType=TINYINT},
+      </if>
+      <if test="trueOrFalseAmount != null">
+        #{trueOrFalseAmount,jdbcType=TINYINT},
+      </if>
+      <if test="trueOrFalseScore != null">
+        #{trueOrFalseScore,jdbcType=REAL},
+      </if>
+      <if test="singleChoiceScore != null">
+        #{singleChoiceScore,jdbcType=REAL},
+      </if>
+      <if test="multipleChoiceScore != null">
+        #{multipleChoiceScore,jdbcType=REAL},
+      </if>
+      <if test="blankFillingScore != null">
+        #{blankFillingScore,jdbcType=REAL},
+      </if>
+      <if test="examTime != null">
+        #{examTime,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="openedCourseId != null">
+        #{openedCourseId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.zhku.shms.bean.Examination">
+    update examination
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="totalScore != null">
+        total_score = #{totalScore,jdbcType=REAL},
+      </if>
+      <if test="singleChioceAmount != null">
+        single_chioce_amount = #{singleChioceAmount,jdbcType=TINYINT},
+      </if>
+      <if test="multipeChioceAmount != null">
+        multipe_chioce_amount = #{multipeChioceAmount,jdbcType=TINYINT},
+      </if>
+      <if test="blankFillingAmount != null">
+        blank_filling_amount = #{blankFillingAmount,jdbcType=TINYINT},
+      </if>
+      <if test="trueOrFalseAmount != null">
+        true_or_false_amount = #{trueOrFalseAmount,jdbcType=TINYINT},
+      </if>
+      <if test="trueOrFalseScore != null">
+        true_or_false_score = #{trueOrFalseScore,jdbcType=REAL},
+      </if>
+      <if test="singleChoiceScore != null">
+        single_choice_score = #{singleChoiceScore,jdbcType=REAL},
+      </if>
+      <if test="multipleChoiceScore != null">
+        multiple_choice_score = #{multipleChoiceScore,jdbcType=REAL},
+      </if>
+      <if test="blankFillingScore != null">
+        blank_filling_score = #{blankFillingScore,jdbcType=REAL},
+      </if>
+      <if test="examTime != null">
+        exam_time = #{examTime,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        "start time" = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        "end time" = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="openedCourseId != null">
+        opened_course_id = #{openedCourseId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.zhku.shms.bean.Examination">
+    update examination
+    set name = #{name,jdbcType=VARCHAR},
+      total_score = #{totalScore,jdbcType=REAL},
+      single_chioce_amount = #{singleChioceAmount,jdbcType=TINYINT},
+      multipe_chioce_amount = #{multipeChioceAmount,jdbcType=TINYINT},
+      blank_filling_amount = #{blankFillingAmount,jdbcType=TINYINT},
+      true_or_false_amount = #{trueOrFalseAmount,jdbcType=TINYINT},
+      true_or_false_score = #{trueOrFalseScore,jdbcType=REAL},
+      single_choice_score = #{singleChoiceScore,jdbcType=REAL},
+      multiple_choice_score = #{multipleChoiceScore,jdbcType=REAL},
+      blank_filling_score = #{blankFillingScore,jdbcType=REAL},
+      exam_time = #{examTime,jdbcType=INTEGER},
+      "start time" = #{startTime,jdbcType=TIMESTAMP},
+      "end time" = #{endTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      opened_course_id = #{openedCourseId,jdbcType=INTEGER},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.zhku.shms.bean.Examination">
+    update examination
+    set name = #{name,jdbcType=VARCHAR},
+      total_score = #{totalScore,jdbcType=REAL},
+      single_chioce_amount = #{singleChioceAmount,jdbcType=TINYINT},
+      multipe_chioce_amount = #{multipeChioceAmount,jdbcType=TINYINT},
+      blank_filling_amount = #{blankFillingAmount,jdbcType=TINYINT},
+      true_or_false_amount = #{trueOrFalseAmount,jdbcType=TINYINT},
+      true_or_false_score = #{trueOrFalseScore,jdbcType=REAL},
+      single_choice_score = #{singleChoiceScore,jdbcType=REAL},
+      multiple_choice_score = #{multipleChoiceScore,jdbcType=REAL},
+      blank_filling_score = #{blankFillingScore,jdbcType=REAL},
+      exam_time = #{examTime,jdbcType=INTEGER},
+      "start time" = #{startTime,jdbcType=TIMESTAMP},
+      "end time" = #{endTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      opened_course_id = #{openedCourseId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

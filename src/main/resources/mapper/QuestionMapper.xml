@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zhku.shms.dao.QuestionMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.zhku.shms.bean.Question">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="score" jdbcType="REAL" property="score" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="option_A" jdbcType="VARCHAR" property="optionA" />
+    <result column="option_B" jdbcType="VARCHAR" property="optionB" />
+    <result column="option_C" jdbcType="VARCHAR" property="optionC" />
+    <result column="option_D" jdbcType="VARCHAR" property="optionD" />
+    <result column="option_E" jdbcType="VARCHAR" property="optionE" />
+    <result column="option_F" jdbcType="VARCHAR" property="optionF" />
+    <result column="exam_id" jdbcType="INTEGER" property="examId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.zhku.shms.bean.QuestionWithBLOBs">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+    <result column="correct_answer" jdbcType="LONGVARCHAR" property="correctAnswer" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, score, type, option_A, option_B, option_C, option_D, option_E, option_F, exam_id
+  </sql>
+  <sql id="Blob_Column_List">
+    description, correct_answer
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from question
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from question
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.zhku.shms.bean.QuestionWithBLOBs">
+    insert into question (id, score, type, 
+      option_A, option_B, option_C, 
+      option_D, option_E, option_F, 
+      exam_id, description, correct_answer
+      )
+    values (#{id,jdbcType=INTEGER}, #{score,jdbcType=REAL}, #{type,jdbcType=TINYINT}, 
+      #{optionA,jdbcType=VARCHAR}, #{optionB,jdbcType=VARCHAR}, #{optionC,jdbcType=VARCHAR}, 
+      #{optionD,jdbcType=VARCHAR}, #{optionE,jdbcType=VARCHAR}, #{optionF,jdbcType=VARCHAR}, 
+      #{examId,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR}, #{correctAnswer,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.zhku.shms.bean.QuestionWithBLOBs">
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="optionA != null">
+        option_A,
+      </if>
+      <if test="optionB != null">
+        option_B,
+      </if>
+      <if test="optionC != null">
+        option_C,
+      </if>
+      <if test="optionD != null">
+        option_D,
+      </if>
+      <if test="optionE != null">
+        option_E,
+      </if>
+      <if test="optionF != null">
+        option_F,
+      </if>
+      <if test="examId != null">
+        exam_id,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="correctAnswer != null">
+        correct_answer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=REAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="optionA != null">
+        #{optionA,jdbcType=VARCHAR},
+      </if>
+      <if test="optionB != null">
+        #{optionB,jdbcType=VARCHAR},
+      </if>
+      <if test="optionC != null">
+        #{optionC,jdbcType=VARCHAR},
+      </if>
+      <if test="optionD != null">
+        #{optionD,jdbcType=VARCHAR},
+      </if>
+      <if test="optionE != null">
+        #{optionE,jdbcType=VARCHAR},
+      </if>
+      <if test="optionF != null">
+        #{optionF,jdbcType=VARCHAR},
+      </if>
+      <if test="examId != null">
+        #{examId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="correctAnswer != null">
+        #{correctAnswer,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.zhku.shms.bean.QuestionWithBLOBs">
+    update question
+    <set>
+      <if test="score != null">
+        score = #{score,jdbcType=REAL},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="optionA != null">
+        option_A = #{optionA,jdbcType=VARCHAR},
+      </if>
+      <if test="optionB != null">
+        option_B = #{optionB,jdbcType=VARCHAR},
+      </if>
+      <if test="optionC != null">
+        option_C = #{optionC,jdbcType=VARCHAR},
+      </if>
+      <if test="optionD != null">
+        option_D = #{optionD,jdbcType=VARCHAR},
+      </if>
+      <if test="optionE != null">
+        option_E = #{optionE,jdbcType=VARCHAR},
+      </if>
+      <if test="optionF != null">
+        option_F = #{optionF,jdbcType=VARCHAR},
+      </if>
+      <if test="examId != null">
+        exam_id = #{examId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="correctAnswer != null">
+        correct_answer = #{correctAnswer,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.zhku.shms.bean.QuestionWithBLOBs">
+    update question
+    set score = #{score,jdbcType=REAL},
+      type = #{type,jdbcType=TINYINT},
+      option_A = #{optionA,jdbcType=VARCHAR},
+      option_B = #{optionB,jdbcType=VARCHAR},
+      option_C = #{optionC,jdbcType=VARCHAR},
+      option_D = #{optionD,jdbcType=VARCHAR},
+      option_E = #{optionE,jdbcType=VARCHAR},
+      option_F = #{optionF,jdbcType=VARCHAR},
+      exam_id = #{examId,jdbcType=INTEGER},
+      description = #{description,jdbcType=LONGVARCHAR},
+      correct_answer = #{correctAnswer,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.zhku.shms.bean.Question">
+    update question
+    set score = #{score,jdbcType=REAL},
+      type = #{type,jdbcType=TINYINT},
+      option_A = #{optionA,jdbcType=VARCHAR},
+      option_B = #{optionB,jdbcType=VARCHAR},
+      option_C = #{optionC,jdbcType=VARCHAR},
+      option_D = #{optionD,jdbcType=VARCHAR},
+      option_E = #{optionE,jdbcType=VARCHAR},
+      option_F = #{optionF,jdbcType=VARCHAR},
+      exam_id = #{examId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
