@@ -1,0 +1,135 @@
+/*通用样式*/
+.shms-icon{
+    color: #868E8E;
+    font-size: 110%;
+}
+.shms-icon:hover{
+    color: #616767;
+    font-size: 110%;
+}
+.shms-div{
+    background-color: white;
+    border-radius: 4px;
+    color: #868E8E;
+}
+/*首页*/
+.index-task-preview li {
+    border: 1px solid #ececec;
+    border-width: 0 1px;
+    margin-left: -1px;
+}
+.index-task-preview li:last-child {
+    border-right: none;
+}
+.index-task-preview {
+    border: 1px solid #d6d9df;
+    margin-top: 0;
+    background-color: white;
+    border-radius: 5px;
+}
+.index-task-preview li:first-child {
+    border-left: none;
+}
+
+/*课程主页*/
+.course-bar{/*课程名bar*/
+    padding: 15px 15px 11px 40px;
+    color: #868E8E;
+
+}
+.course-bar-description {
+    margin-top: 4px;
+    margin-bottom: 0;
+    font-size: 12px;
+    color: #737a7a;
+}
+.course-bar-title {
+    font-size: 20px;
+    color: #616767;
+    font-weight: 400;
+}
+.course-bar-title .page-header-heading-ico {
+    font-size: 28px;
+    position: relative;
+    top: 3px;
+}
+.course-bar-title small {
+    font-weight: normal;
+    line-height: 1;
+    color: #B3B3B3;
+}
+.course-content{/*内容面板*/
+
+}
+.course-tasklist{
+    margin-left: 30px;
+}
+.panel-course .am-g{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+/*课程导航*/
+.course-nav{
+    padding-left: 0px;
+    padding-right: 30px;
+}
+.course-nav div{
+    margin-bottom: 15px;
+}
+.course-bar-head{
+    margin-bottom: 15px;
+}
+.course-bar-nav{
+    background-color: white;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+.course-bar-foot{
+    background-color: white;
+    border-radius: 4px;
+    padding: 10px;
+}
+.course-bar-tags{
+    padding: 10px;
+}
+.course-nav-link a {
+    display: block;
+    color: #868E8E;
+    padding: 10px 17px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.course-nav-link a.active {
+    cursor: pointer;
+    background-color: #1CA2CE;
+    color: #fff;
+
+}
+.course-nav-link a:hover {
+    background: #f2f6f9;
+    color: #868E8E;
+    border-left: #3bb4f2 3px solid;
+}
+.course-bar-foot>span:first-child,.course-bar-tags>span:first-child{
+    font-size: 1.2em;
+    color: #868E8E;
+    margin-bottom: 1.5rem;
+    margin-left: 1.2rem;
+}
+.course-bar-foot span{
+    margin-left: 10px;
+}
+.course-bar-tags a{
+    color: #868E8E;
+    background: #F3F3F3;
+    margin: 0.2rem 0rem 0rem 0.18rem;
+    line-height: 2.5rem;
+    font-size: 0.8em;
+    /*float: left;*/
+    border: 1px solid #eee;
+    padding: 0.2rem 0.8rem 0.2rem 0.8rem;
+}
+.course-bar-tags a:hover{
+    background: #1ca2ce;
+    color: #fff;
+}
